@@ -1,0 +1,9 @@
+D:\Development\Unity Projects\Sci\y2018\Naukova2018\VehicleInfo\VehicleInfo\bin\Debug\VehicleInfo.dll
+D:\Development\Unity Projects\Sci\y2018\Naukova2018\VehicleInfo\VehicleInfo\bin\Debug\VehicleInfo.pdb
+D:\Development\Unity Projects\Sci\y2018\Naukova2018\VehicleInfo\VehicleInfo\obj\Debug\VehicleInfo.csprojAssemblyReference.cache
+D:\Development\Unity Projects\Sci\y2018\Naukova2018\VehicleInfo\VehicleInfo\obj\Debug\VehicleInfo.csproj.CoreCompileInputs.cache
+D:\Development\Unity Projects\Sci\y2018\Naukova2018\VehicleInfo\VehicleInfo\obj\Debug\VehicleInfo.dll
+D:\Development\Unity Projects\Sci\y2018\Naukova2018\VehicleInfo\VehicleInfo\obj\Debug\VehicleInfo.pdb
+D:\Development\Unity Projects\Sci\y2018\Naukova2018\VehicleInfo\VehicleInfo\bin\Debug\UnityEngine.dll
+D:\Development\Unity Projects\Sci\y2018\Naukova2018\VehicleInfo\VehicleInfo\bin\Debug\UnityEngine.xml
+D:\Development\Unity Projects\Sci\y2018\Naukova2018\VehicleInfo\VehicleInfo\obj\Debug\VehicleInfo.csproj.CopyComplete

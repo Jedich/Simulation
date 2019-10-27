@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4102528944992598}
   - component: {fileID: 33131018919709042}
   - component: {fileID: 23980234920889932}
+  - component: {fileID: 5762902773723446189}
   m_Layer: 10
   m_Name: point
   m_TagString: Untagged
@@ -77,3 +78,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5762902773723446189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851223122492672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc8801d15de1e284db3634bf2c8fa7e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacle: 0
+  nearest1: {fileID: 0}
+  nearest2: {fileID: 0}
