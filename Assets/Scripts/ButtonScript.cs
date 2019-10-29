@@ -2,16 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class ButtonScript : MonoBehaviour {
-	public GameObject pos;
+	public GameObject pos, hideable;
+	public Slider rWheel, lWheel, bothWheels;
 	private void Start() {
+		CarPreferences Car = new CarPreferences();
+		if (Car.pref["GUI"] == 0)
+			hideable.SetActive(false);
+		else hideable.SetActive(true);
 		Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer("points"));
 	}
 	private void Update() {
-		if(Input.GetKeyDown(KeyCode.R))
+		if (Input.GetKeyDown(KeyCode.R))
 			Restart();
-		if(Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space))
 			Pause();
+		CarController.motorMultiplier = lWheel.value/10f;
+		CarController.angleMultiplier = rWheel.value/10f;
 	}
 	public void CheckInput() {
 		Camera.main.cullingMask = 1 << 10;
@@ -27,8 +35,12 @@ public class ButtonScript : MonoBehaviour {
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 	public void Pause() {
-		if(Time.timeScale == 0)
+		if (Time.timeScale == 0)
 			Time.timeScale = 1;
 		else Time.timeScale = 0;
+	}
+	public void MainSlider() {
+		rWheel.value = bothWheels.value;
+		lWheel.value = bothWheels.value;
 	}
 }

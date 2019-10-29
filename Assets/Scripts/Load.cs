@@ -22,6 +22,7 @@ public class Load : MonoBehaviour {
 	GameObject temp;
 	Vector3 direction;
 	public GameObject[] IRprefabs;
+	public GameObject gyroPrefab;
 	public static List<Point> currentPoints = new List<Point>();
 	public static List<Vector3> points = new List<Vector3>();
 	public static GameObject[] pointsToDelete;
@@ -43,7 +44,6 @@ public class Load : MonoBehaviour {
 		// nearest.GetComponent<LineRenderer>().SetPosition(0, IRprefabs[0].transform.position);
 		// nearest.GetComponent<LineRenderer>().SetPosition(1, distantPoint.transform.position);
 		// pos.text = distantPoint.transform.position.ToString();
-		Debug.Log(temp.GetComponent<Rigidbody>().angularVelocity);
 		IRprefabs[0].transform.position = new Vector3(IRprefabs[0].transform.parent.position.x, IRprefabs[0].transform.parent.position.y + 0.25f, IRprefabs[0].transform.parent.position.z);
 	}
 
@@ -67,6 +67,8 @@ public class Load : MonoBehaviour {
 		Time.fixedDeltaTime = Car.pref["updateDelay"];
 		System.Array.Resize(ref pointsToDelete, (int)(Car.pref["degreeX"] * Car.pref["degreeY"]));
 		temp = Instantiate(carBody);
+		if(Car.pref["Gyro"] == 1)
+			Instantiate(gyroPrefab, temp.transform);
 		IRprefabs[0] = Instantiate(IRprefabs[2], temp.transform);
 		IRprefabs[0].transform.position = new Vector3(temp.transform.position.x, 0f, temp.transform.position.z);
 		temp.transform.position = new Vector3(0, 1f, 0);

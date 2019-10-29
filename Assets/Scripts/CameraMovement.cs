@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CameraMovement : MonoBehaviour {
 	public float ZoomAmount = 0;
@@ -15,7 +16,7 @@ public class CameraMovement : MonoBehaviour {
 		ZoomAmount = Mathf.Clamp(ZoomAmount, -MaxToClamp, MaxToClamp);
 		var translate = Mathf.Min(Mathf.Abs(Input.GetAxis("Mouse ScrollWheel")), MaxToClamp - Mathf.Abs(ZoomAmount));
 		gameObject.transform.Translate(0, 0, translate * ROTSpeed * Mathf.Sign(Input.GetAxis("Mouse ScrollWheel")));
-		if(Input.GetMouseButton(0)) {
+		if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject()) {
 			transform.RotateAround(target.position, transform.right, -Input.GetAxis("Mouse Y") * speedMod);
 			transform.RotateAround(target.position, transform.up, Input.GetAxis("Mouse X") * speedMod);
 		}
