@@ -74,15 +74,15 @@ MonoBehaviour:
     rightWheel: {fileID: 4334544304008529688}
     leftMesh: {fileID: 1987897599782283458}
     rightMesh: {fileID: 8558702965906124395}
-    motor: 1
+    motor: 0
     steering: 1
   - leftWheel: {fileID: 6182099678598483221}
     rightWheel: {fileID: 5432342088643770346}
     leftMesh: {fileID: 1533947244322477817}
     rightMesh: {fileID: 5731154131370850270}
-    motor: 0
+    motor: 1
     steering: 0
-  maxMotorTorque: 10
+  maxMotorTorque: 5
   maxSteeringAngle: 30
 --- !u!64 &6654522369711236733
 MeshCollider:
@@ -153,15 +153,15 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 1.75
   m_SuspensionSpring:
-    spring: 12000
-    damper: 50
-    targetPosition: 0.6
+    spring: 900
+    damper: 45
+    targetPosition: 0.02
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
-  m_Mass: 10
+  m_Mass: 2
   m_WheelDampingRate: 0.0001
   m_ForwardFriction:
-    m_ExtremumSlip: 0.5
+    m_ExtremumSlip: 2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
@@ -214,15 +214,15 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 1.75
   m_SuspensionSpring:
-    spring: 12000
-    damper: 50
-    targetPosition: 0.6
+    spring: 900
+    damper: 45
+    targetPosition: 0.02
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
-  m_Mass: 10
+  m_Mass: 2
   m_WheelDampingRate: 0.0001
   m_ForwardFriction:
-    m_ExtremumSlip: 0.5
+    m_ExtremumSlip: 2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
@@ -275,15 +275,15 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 1.75
   m_SuspensionSpring:
-    spring: 12000
-    damper: 50
-    targetPosition: 0.6
+    spring: 900
+    damper: 45
+    targetPosition: 0.02
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
-  m_Mass: 10
+  m_Mass: 2
   m_WheelDampingRate: 0.0001
   m_ForwardFriction:
-    m_ExtremumSlip: 0.5
+    m_ExtremumSlip: 2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
@@ -336,15 +336,15 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 1.75
   m_SuspensionSpring:
-    spring: 12000
-    damper: 50
-    targetPosition: 0.6
+    spring: 900
+    damper: 45
+    targetPosition: 0.02
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
-  m_Mass: 10
+  m_Mass: 2
   m_WheelDampingRate: 0.0001
   m_ForwardFriction:
-    m_ExtremumSlip: 0.5
+    m_ExtremumSlip: 2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5

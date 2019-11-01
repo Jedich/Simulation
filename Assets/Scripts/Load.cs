@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 using VehicleInfo;
 
 public class Load : MonoBehaviour {
 	public string t = "";
-	bool turn = false;
+	public Gyroscope existingGyro;
 	public GameObject carBody, defaultWheel, waypoint;
+	public Transform pointCloud, objCloud;
 	public GameObject[] randomGameObjects;
 	public int randomObjNumber;
 	public GameObject distantPoint;
@@ -24,52 +26,53 @@ public class Load : MonoBehaviour {
 	public GameObject[] IRprefabs;
 	public GameObject gyroPrefab;
 	public static List<Point> currentPoints = new List<Point>();
-	public static List<Vector3> points = new List<Vector3>();
-	public static GameObject[] pointsToDelete;
-	public List<Point> observe;
+	public static Dictionary<string, GameObject> pointsToDelete = new Dictionary<string, GameObject>();
+	public Sensor sensor;
+	IGetBehaviour lidar;
 	public void Updater() {
 		Car = new CarPreferences();
 	}
 	public IEnumerator Clearing() {
 		yield return new WaitForSeconds(3);
-		for (int i = 0; i < pointsToDelete.Length; i++)
-			if (pointsToDelete[i] != null && pointsToDelete[i].transform.position == new Vector3(0, -1, 0)){
+		for (int i = 0; i < pointsToDelete.Count; i++)
+			if (pointsToDelete.ElementAt(i).Value != null && pointsToDelete.ElementAt(i).Value.transform.position == new Vector3(0, -1, 0)) {
 				// if(currentPoints.Contains(pointsToDelete[i].GetComponent<Point>()))
-				currentPoints.Remove(pointsToDelete[i].GetComponent<Point>());
-				Destroy(pointsToDelete[i]);
+				currentPoints.Remove(pointsToDelete.ElementAt(i).Value.GetComponent<Point>());
+				Destroy(pointsToDelete.ElementAt(i).Value);
 			}
 	}
 	private void Update() {
-		observe = currentPoints;
-		// nearest.GetComponent<LineRenderer>().SetPosition(0, IRprefabs[0].transform.position);
-		// nearest.GetComponent<LineRenderer>().SetPosition(1, distantPoint.transform.position);
-		// pos.text = distantPoint.transform.position.ToString();
 		IRprefabs[0].transform.position = new Vector3(IRprefabs[0].transform.parent.position.x, IRprefabs[0].transform.parent.position.y + 0.25f, IRprefabs[0].transform.parent.position.z);
 	}
 
 	public void FixedUpdate() {
-		distance = 100;
-				if (Car.pref["Tier"] == 0) {
-			ViewSensor lidar;
-			lidar = new ViewSensor(IRprefabs[0], IRprefabs[1]);
-			lidar.Behaviour();
-		} else if (Car.pref["Tier"] == 2) {
-			Tier1LIDAR lidar;
-			lidar = new Tier1LIDAR(IRprefabs[0], IRprefabs[1]);
-			lidar.Behaviour();
-		}
-		
+		lidar.Behaviour();
 	}
 
 	public void Start() {
 		StartCoroutine(Clearing());
 		Car = new CarPreferences();
 		Time.fixedDeltaTime = Car.pref["updateDelay"];
-		System.Array.Resize(ref pointsToDelete, (int)(Car.pref["degreeX"] * Car.pref["degreeY"]));
+		//System.Array.Resize(ref pointsToDelete, (int)(Car.pref["degreeX"] * Car.pref["degreeY"]));
 		temp = Instantiate(carBody);
-		if(Car.pref["Gyro"] == 1)
-			Instantiate(gyroPrefab, temp.transform);
+		if (Car.pref["Gyro"] == 1){
+			GameObject gyro;
+			gyro = Instantiate(gyroPrefab, temp.transform);
+			existingGyro = gyro.GetComponent<Gyroscope>();
+		}
 		IRprefabs[0] = Instantiate(IRprefabs[2], temp.transform);
+		if (Car.pref["Tier"] == 1){
+			IRprefabs[0].AddComponent(typeof(ViewSensor));
+			sensor = IRprefabs[0].GetComponent<ViewSensor>();
+		}
+		else if (Car.pref["Tier"] == 2){
+			IRprefabs[0].AddComponent(typeof(Tier1LIDAR));
+			sensor = IRprefabs[0].GetComponent<Tier1LIDAR>();
+		}
+		sensor.point = IRprefabs[1];
+		sensor.spawned = IRprefabs[0];
+		sensor.pointCloudHandler = pointCloud;
+		lidar = sensor;
 		IRprefabs[0].transform.position = new Vector3(temp.transform.position.x, 0f, temp.transform.position.z);
 		temp.transform.position = new Vector3(0, 1f, 0);
 		IRprefabs[0].transform.parent = temp.transform;
@@ -81,7 +84,7 @@ public class Load : MonoBehaviour {
 		waypoint.transform.position = position;
 		for (int i = 0; i < randomObjNumber; i++) {
 			GameObject toSpawn = randomGameObjects[Random.Range(0, randomGameObjects.Length - 1)];
-			GameObject spawned = Instantiate(toSpawn);
+			GameObject spawned = Instantiate(toSpawn, objCloud);
 			Vector3 pos;
 			pos.z = i * 5 + 5;
 			if (Random.Range(-2, 1) < 0)
@@ -104,6 +107,14 @@ public class CarPreferences {
 		for (int i = 0; i < currLine.Length; i++)
 			if (currLine[i] != "<end>")
 				pref.Add(currLine[i].Substring(0, currLine[i].IndexOf("=")), float.Parse(currLine[i].Substring(currLine[i].IndexOf("=") + 1)));
-	
+
 	}
+}
+interface IGetBehaviour {
+	void Behaviour();
+}
+public abstract class Sensor: MonoBehaviour, IGetBehaviour{
+	public GameObject point, spawned;
+	public Transform pointCloudHandler;
+	public abstract void Behaviour();
 }
