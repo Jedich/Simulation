@@ -34,27 +34,29 @@ public class Point : MonoBehaviour {
 		if (!Load.currentPoints.Contains(this))
 			Load.currentPoints.Add(this);
 	}
-	void Start() {
-		Car = new CarPreferences();
-
-	}
-	void Update() {
-
-		if (nearest1 != null && nearest2 != null) {
-			angle = Vector3.Angle(nearest1.gameObject.transform.position - gameObject.transform.position, nearest2.gameObject.transform.position - gameObject.transform.position);
-			if (angle > Car.pref["maxAngle"] && nearest2.obstacle) {
-				obstacle = true;
-			} else {
-				if (angle >= Car.pref["maxAngle"]) {
-					obstacle = false;
-				} else {
-					obstacle = true;
+	void FixedUpdate() {
+		if (coords[0] != 0 && coords[1] != 0) {
+			transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
+			if (Car.pref["coloring"] == 0) {
+				if (nearest1 != null && nearest2 != null) {
+					angle = Vector3.Angle(nearest1.gameObject.transform.position - gameObject.transform.position, nearest2.gameObject.transform.position - gameObject.transform.position);
+					if (angle > Car.pref["maxAngle"] && nearest2.obstacle) {
+						obstacle = true;
+					} else {
+						if (angle >= Car.pref["maxAngle"]) {
+							obstacle = false;
+						} else {
+							obstacle = true;
+						}
+					}
 				}
+				if (obstacle)
+					gameObject.GetComponent<Renderer>().material.color = Color.red;
+				else
+					gameObject.GetComponent<Renderer>().material.color = Color.green;
+			} else if (Car.pref["coloring"] == 1) {
+				gameObject.GetComponent<Renderer>().material.color = Color.HSVToRGB(Vector3.Distance(Load.carBodyInst.transform.position, transform.position) / 8f, 1, 1);
 			}
-			if (obstacle)
-				gameObject.GetComponent<Renderer>().material.color = Color.red;
-			else
-				gameObject.GetComponent<Renderer>().material.color = Color.green;
 		}
 	}
 }

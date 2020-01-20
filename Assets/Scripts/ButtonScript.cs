@@ -14,7 +14,7 @@ public class ButtonScript : MonoBehaviour {
 			hideable.SetActive(false);
 		else hideable.SetActive(true);
 		Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer("points"));
-		if(gameObject.GetComponent<Load>().existingGyro != null)
+		if (gameObject.GetComponent<Load>().existingGyro != null)
 			gyroscope = gameObject.GetComponent<Load>().existingGyro;
 	}
 	private void Update() {
@@ -22,8 +22,12 @@ public class ButtonScript : MonoBehaviour {
 			Restart();
 		if (Input.GetKeyDown(KeyCode.Space))
 			Pause();
-		CarController.motorMultiplier = lWheel.value/10f;
-		CarController.angleMultiplier = rWheel.value/10f;
+		if (Input.GetKeyDown(KeyCode.Minus))
+			Time.timeScale -= 0.1f;
+		if (Input.GetKeyDown(KeyCode.Plus))
+			Time.timeScale += 0.1f;
+		CarController.motorMultiplier = lWheel.value / 10f;
+		CarController.angleMultiplier = rWheel.value / 10f;
 		rotationInfo.text = gyroscope.angularVel + "\n" + gyroscope.rotation + "\n" + gyroscope.acceleration;
 	}
 	public void CheckInput() {
@@ -37,6 +41,8 @@ public class ButtonScript : MonoBehaviour {
 		pos.SetActive(false);
 	}
 	public void Restart() {
+		Load.pointsToDelete.Clear();
+		Load.currentPoints.Clear();
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 	public void Pause() {
