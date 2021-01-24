@@ -13,6 +13,7 @@ public class Load : MonoBehaviour {
 	public Sensor sensor;
 	public GameObject pointPrefab;
 	public GameObject physicalPrefab;
+	public ParticleSystem pointCloud;
 	public static Load instance = null;
 
 	public void Start() {

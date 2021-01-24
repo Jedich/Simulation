@@ -33,20 +33,21 @@ public abstract class Sensor : MonoBehaviour {
 
 	private IEnumerator RunGeneration(Pool pool) {
 		int counter = 0;
-		//int iter = 0, jter = 0;
+		int iter = 0, jter = 0;
 		for (float i = 0; i <= pool.SizeY; i += CarPreferences.map["stepY"]) {
 			for (float j = 0; j <= pool.SizeX; j += CarPreferences.map["stepX"]) {
-				pool.Map[i.ToString() + j.ToString()] = new Point((int)i, (int)j, Instantiate(Load.instance.pointPrefab, pointCloudHandler));
-				//pool.testPool[iter * jter] = new ParticleSystem.Particle();
+				int index = iter * pool.SizeY + jter;
+				//pool.Map[i.ToString() + j.ToString()] = new Point((int)i, (int)j, Instantiate(Load.instance.pointPrefab, pointCloudHandler));
+				pool.testPool[index] = new ParticleSystem.Particle();
 				counter++;
+				jter++;
 			}
 			Debug.Log("pooling...");
 			yield return new WaitForEndOfFrame();
-			//jter++;
+			iter++;
 		}
 		Debug.Log("pooling finished.");
 		pool.isCompleted = true;
-		//iter++;
 	}
 
 	private void Start() {

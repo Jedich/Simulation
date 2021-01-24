@@ -7,7 +7,7 @@ public class Pool {
 
 	public Dictionary<string, Point> Map => map;
 
-	//public ParticleSystem.Particle[] testPool;
+	public ParticleSystem.Particle[] testPool;
 
 	public int SizeX => sizeX;
 
@@ -27,5 +27,6 @@ public class Pool {
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
 		isCompleted = false;
+		testPool = new ParticleSystem.Particle[sizeX/(int)CarPreferences.map["stepX"]*sizeY/(int)CarPreferences.map["stepY"]];
 	}
 }
