@@ -9,8 +9,7 @@ public class ButtonScript : MonoBehaviour {
 	public Text rotationInfo;
 	Gyroscope gyroscope;
 	private void Start() {
-		CarPreferences Car = new CarPreferences();
-		if (Car.pref["GUI"] == 0)
+		if (CarPreferences.map["GUI"] == 0)
 			hideable.SetActive(false);
 		else hideable.SetActive(true);
 		Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer("points"));

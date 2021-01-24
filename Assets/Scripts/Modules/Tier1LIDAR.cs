@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using UnityEngine;
 
-class Tier1LIDAR : ViewSensor, IGetBehaviour {
+class Tier1LIDAR : Sensor, IGetBehaviour {
 	int boundCount = 0;
 	public float coordinatesX = 0, coordinatesY = 0;
 	GameObject pointInstance = null;
@@ -16,12 +16,11 @@ class Tier1LIDAR : ViewSensor, IGetBehaviour {
 	bool poolCompleted = false;
 	void Start() {
 		spawnedRigidbody = spawned.GetComponent<Rigidbody>();
-		Car = new CarPreferences();
 		hit = new RaycastHit();
-		degY = Car.pref["degreeY"];
-		degX = Car.pref["degreeX"];
-		stepY = Car.pref["stepY"];
-		stepX = Car.pref["stepX"];
+		degY = CarPreferences.map["degreeY"];
+		degX = CarPreferences.map["degreeX"];
+		stepY = CarPreferences.map["stepY"];
+		stepX = CarPreferences.map["stepX"];
 		// for (int i = 0; i < (degX / stepX) * (degY / stepY); i++) {
 		// 	//Debug.Log((degX / stepX) * (degY / stepY));
 		// 	pool.Add(Instantiate(point, pointCloudHandler));
@@ -38,7 +37,7 @@ class Tier1LIDAR : ViewSensor, IGetBehaviour {
 					cat = Cat(spawned.transform, spawnedRigidbody, hit);
 					pointInstance = null;
 					if (!Load.pointsToDelete.ContainsKey(i.ToString() + j.ToString())) {
-						if (boundCount < Car.pref["cycleBound"]) {
+						if (boundCount < CarPreferences.map["cycleBound"]) {
 							pointInstance =Instantiate(point, pointCloudHandler);
 							//pool.RemoveAt(0);
 							pointInstance.name = "point-" + j + "-" + i;
@@ -57,7 +56,7 @@ class Tier1LIDAR : ViewSensor, IGetBehaviour {
 				}
 				//yield return new WaitForEndOfFrame();
 			}
-			if (Car.pref["coloring"] == 0) {
+			if (CarPreferences.map["coloring"] == 0) {
 				for (int i = 0; i < Load.currentPoints.Count; i++) {
 					Load.currentPoints[i].Search();
 				}
