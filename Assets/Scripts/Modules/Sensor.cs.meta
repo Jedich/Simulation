@@ -1,3 +1,16 @@
-﻿fileFormatVersion: 2
+fileFormatVersion: 2
 guid: 969317337ecb43408dfc0fae6a42a35c
-timeCreated: 1611477715
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - pointPrefab: {fileID: 1851223122492672, guid: ba14755fa25452c438299905007188b9,
+      type: 3}
+  - physicalPrefab: {fileID: 1261573875801060, guid: 1fe0b9b0fe8c9ac418d255d003a859f1,
+      type: 3}
+  - pointCloudHandler: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
