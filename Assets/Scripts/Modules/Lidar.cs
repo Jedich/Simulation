@@ -30,6 +30,7 @@ class Lidar : Sensor {
 	public override void Behaviour() {
 		boundCount = 0;
 		string currentPoint;
+		Load.instance.pointCloud.GetParticles(pool.testPool);
 		int iter = 0, jter = 0;
 		for (float i = 0; i <= degY; i += stepY) {
 			for (float j = 0; j <= degX; j += stepX) {
@@ -48,8 +49,8 @@ class Lidar : Sensor {
 				}
 				temp = pool.testPool[index];
 				temp.position = currentRay.point;
-				temp.startColor = Color.green;
-				temp.startSize = 0.1f;
+				temp.startColor = Coloring(temp.position);
+				temp.startSize = 0.05f;
 				pool.testPool[index] = temp;
 				//poolMap[currentPoint].physical.SetActive(true);
 				//poolMap[currentPoint].physical.transform.position = currentRay.point;

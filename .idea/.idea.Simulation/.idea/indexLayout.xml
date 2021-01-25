@@ -26,6 +26,7 @@
       <Path>Temp</Path>
       <Path>VehicleInfo</Path>
       <Path>obj</Path>
+      <Path>opencv-pipe</Path>
     </explicitExcludes>
   </component>
 </project>

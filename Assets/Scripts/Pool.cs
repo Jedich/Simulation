@@ -27,6 +27,6 @@ public class Pool {
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
 		isCompleted = false;
-		testPool = new ParticleSystem.Particle[sizeX/(int)CarPreferences.map["stepX"]*sizeY/(int)CarPreferences.map["stepY"]];
+		testPool = new ParticleSystem.Particle[sizeX/(int)CarPreferences.map["stepX"]*sizeY/(int)CarPreferences.map["stepY"]+1];
 	}
 }

@@ -39,8 +39,10 @@ public class Load : MonoBehaviour {
 			carBodyInst.AddComponent(typeof(Lidar));
 			sensor = carBodyInst.GetComponent<Lidar>();
 		}
-		sensor.physicalPrefab = physicalPrefab;
-		sensor.pointPrefab = pointPrefab;
+		if (CarPreferences.map["Tier"] != 2) {
+			sensor.physicalPrefab = physicalPrefab;
+			sensor.pointPrefab = pointPrefab;
+		}
 		Camera.main.transform.parent = carBodyInst.transform;
 		CameraMovement.target = carBodyInst.transform;
 	}

@@ -68,4 +68,15 @@ public abstract class Sensor : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.P))
 			Snapshot();
 	}
+	
+	public Color Coloring(Vector3 originalPos = new Vector3()) {
+		switch (CarPreferences.map["coloring"]) {
+			case 0:
+				return Color.red;
+			case 1:
+				return Color.HSVToRGB(Vector3.Distance(originalPos, Load.instance.carBodyInst.transform.position) / 8f, 1, 1);
+			default:
+				return Color.black;
+		}
+	}
 }

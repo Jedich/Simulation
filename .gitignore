@@ -13,6 +13,9 @@
 *.userprefs
 *.pidb
 *.booproj
+/opencv-pipe/venv/
+/opencv-pipe/.idea/
+/.idea
 
 # Unity3D generated meta files
 *.pidb.meta
