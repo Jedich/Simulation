@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class Point {
 	public bool obstacle = false;
-	private int posX;
-	private int posY;
-	public GameObject physical;
-	
-	public Point(int X, int Y, GameObject physical) {
-		posX = X;
-		posY = Y;
-		this.physical = physical;
+	public int gridPosX, gridPosY;
+	public bool isPresent = true;
+	public Vector3 position;
+	public Point(int gridPosX, int gridPosY) {
+		this.gridPosX = gridPosX;
+		this.gridPosY = gridPosY;
 	}
 }

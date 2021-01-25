@@ -14,6 +14,7 @@ public class Load : MonoBehaviour {
 	public GameObject pointPrefab;
 	public GameObject physicalPrefab;
 	public ParticleSystem pointCloud;
+	public ParticleSystem obstaclePointCloud;
 	public static Load instance = null;
 
 	public void Start() {

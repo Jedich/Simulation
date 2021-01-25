@@ -30,7 +30,7 @@ public class WheelDrive : MonoBehaviour
 	[Tooltip("The vehicle's drive type: rear-wheels drive, front-wheels drive or all-wheels drive.")]
 	public DriveType driveType;
 	
-	public float motorMultiplier = 0, angleMultiplier = 0;
+	public static float motorMultiplier = 0, angleMultiplier = 0;
 
 	public bool keyboardInput = false;
 	

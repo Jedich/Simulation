@@ -5,11 +5,11 @@ public class DistanceSensor : Sensor {
 	private Point point;
 
 	public override void Init() {
-		point = new Point(0, 0, Instantiate(Load.instance.pointPrefab, pointCloudHandler));
+		
 	}
 	public override void Behaviour() {
 		currentRay = Ray(physical.transform, physicalRigidbody, hit);
-		point.physical.transform.position = currentRay.point;
+		point = new Point(0, 0);
 	}
 
 	public override void Snapshot() {

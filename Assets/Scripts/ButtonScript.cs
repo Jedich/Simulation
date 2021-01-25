@@ -25,8 +25,8 @@ public class ButtonScript : MonoBehaviour {
 			Time.timeScale -= 0.1f;
 		if (Input.GetKeyDown(KeyCode.Plus))
 			Time.timeScale += 0.1f;
-		//CarController.motorMultiplier = lWheel.value / 10f;
-		//CarController.angleMultiplier = rWheel.value / 10f;
+		WheelDrive.motorMultiplier = lWheel.value / 10f;
+		WheelDrive.angleMultiplier = rWheel.value / 10f;
 		//rotationInfo.text = gyroscope.angularVel + "\n" + gyroscope.rotation + "\n" + gyroscope.acceleration;
 	}
 	public void CheckInput() {

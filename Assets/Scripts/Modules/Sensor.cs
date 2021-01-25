@@ -13,6 +13,7 @@ public abstract class Sensor : MonoBehaviour {
 	public Transform pointCloudHandler;
 	internal RaycastHit hit = new RaycastHit();
 	public Pool pool;
+	public Vector3 relativePosition;
 	public abstract void Behaviour();
 	public abstract void Snapshot();
 	public abstract void Init();
@@ -35,10 +36,10 @@ public abstract class Sensor : MonoBehaviour {
 		int counter = 0;
 		int iter = 0, jter = 0;
 		for (float i = 0; i <= pool.SizeY; i += CarPreferences.map["stepY"]) {
+			jter = 0;
 			for (float j = 0; j <= pool.SizeX; j += CarPreferences.map["stepX"]) {
 				int index = iter * pool.SizeY + jter;
-				//pool.Map[i.ToString() + j.ToString()] = new Point((int)i, (int)j, Instantiate(Load.instance.pointPrefab, pointCloudHandler));
-				pool.testPool[index] = new ParticleSystem.Particle();
+				pool.Map[iter.ToString() + "-" + jter.ToString()] = new Point(iter, jter);
 				counter++;
 				jter++;
 			}
@@ -65,8 +66,7 @@ public abstract class Sensor : MonoBehaviour {
 	}
 	
 	private void Update() {
-		if (Input.GetKeyDown(KeyCode.P))
-			Snapshot();
+		if (Input.GetKeyDown(KeyCode.P)) Snapshot();
 	}
 	
 	public Color Coloring(Vector3 originalPos = new Vector3()) {
@@ -74,6 +74,7 @@ public abstract class Sensor : MonoBehaviour {
 			case 0:
 				return Color.red;
 			case 1:
+				//Debug.Log(Color.HSVToRGB(Vector3.Distance(originalPos, Load.instance.carBodyInst.transform.position) / 8f, 1, 1));
 				return Color.HSVToRGB(Vector3.Distance(originalPos, Load.instance.carBodyInst.transform.position) / 8f, 1, 1);
 			default:
 				return Color.black;

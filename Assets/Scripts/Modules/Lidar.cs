@@ -7,11 +7,7 @@ using System.Threading;
 using UnityEngine;
 
 class Lidar : Sensor {
-	int boundCount = 0;
-	public float coordinatesX = 0, coordinatesY = 0;
-	GameObject pointInstance = null;
 	private RaycastHit currentRay;
-	public Dictionary<string, Point> poolMap = new Dictionary<string, Point>();
 	GameObject inst;
 	private float degY, degX, stepY, stepX;
 	private ParticleSystem.Particle temp;
@@ -21,46 +17,41 @@ class Lidar : Sensor {
 		degX = CarPreferences.map["degreeX"];
 		stepY = CarPreferences.map["stepY"];
 		stepX = CarPreferences.map["stepX"];
-		
+		relativePosition = new Vector3(0, 0.25f, 0);
 		pool = GeneratePool((int) degX, (int) degY);
-
-		poolMap = pool.Map;
 	}
 
 	public override void Behaviour() {
-		boundCount = 0;
 		string currentPoint;
-		Load.instance.pointCloud.GetParticles(pool.testPool);
 		int iter = 0, jter = 0;
+		List<ParticleSystem.Particle> testList = new List<ParticleSystem.Particle>();
 		for (float i = 0; i <= degY; i += stepY) {
+			jter = 0;
 			for (float j = 0; j <= degX; j += stepX) {
-				currentPoint = i.ToString() + j.ToString();
+				currentPoint = iter.ToString() + "-" + jter.ToString();
 				int index = iter * (int)degY + jter;
 				physicalRigidbody.rotation = Quaternion.Euler(i - degY / 2, j - degX / 2, 0);
 				try {
 					currentRay = Ray(physical.transform, physicalRigidbody, hit);
 				}
-				catch (EntryPointNotFoundException e) {
-					//poolMap[currentPoint].physical.SetActive(false);
-					temp = pool.testPool[index];
-					temp.position = Vector3.zero;
-					pool.testPool[index] = temp;
+				catch (EntryPointNotFoundException) {
 					continue;
 				}
-				temp = pool.testPool[index];
+				pool.map[currentPoint].isPresent = true;
+				pool.map[currentPoint].obstacle = false;
+				pool.map[currentPoint].position = currentRay.point;
+				temp = new ParticleSystem.Particle();
 				temp.position = currentRay.point;
-				temp.startColor = Coloring(temp.position);
 				temp.startSize = 0.05f;
-				pool.testPool[index] = temp;
-				//poolMap[currentPoint].physical.SetActive(true);
-				//poolMap[currentPoint].physical.transform.position = currentRay.point;
+				testList.Add(temp);
 				jter++;
 			}
 			iter++;
 		}
 		physicalRigidbody.rotation = Quaternion.Euler(0, 0, 0);
 		Load.instance.pointCloud.Clear();
-		Load.instance.pointCloud.SetParticles(pool.testPool.ToArray());
+		Load.instance.pointCloud.SetParticles(testList.ToArray());
+		physical.transform.position = transform.position + relativePosition;
 	}
 
 	public override void Snapshot() {
@@ -79,4 +70,3 @@ class Lidar : Sensor {
 		}
 	}
 }
-//spawnedSample.position, spawnedSample.rotation * Vector3.forward, out hit, 10
