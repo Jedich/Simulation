@@ -51,7 +51,7 @@ public class Pool {
 							float angle = Vector3.Angle(map[lower].position - point.Value.position,
 								map[upper].position - point.Value.position);
 							//Debug.Log(angle);
-							if (angle < CarPreferences.map["maxAngle"]) {
+							if (angle < CarPreferences.current.maxAngle) {
 								ParticleSystem.Particle p = new ParticleSystem.Particle();
 								p.position = point.Value.position;
 								p.startSize = 0.05f;

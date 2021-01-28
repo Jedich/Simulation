@@ -19,7 +19,7 @@ public abstract class Sensor : MonoBehaviour {
 	public abstract void Init();
 	
 	public RaycastHit Ray(Transform spawnedSample, Rigidbody spawnedSampleRigidbody, RaycastHit hit) {
-		if (Physics.Raycast(spawnedSample.position, spawnedSampleRigidbody.rotation * Vector3.forward, out hit, CarPreferences.map["rayDist"]) && hit.transform != null) {
+		if (Physics.Raycast(spawnedSample.position, spawnedSampleRigidbody.rotation * Vector3.forward, out hit, CarPreferences.current.rayDist) && hit.transform != null) {
 			//Debug.DrawRay(spawnedSample.position, spawnedSampleRigidbody.rotation * Vector3.forward * hit.distance, Color.yellow);
 			return hit;
 		}
@@ -35,9 +35,9 @@ public abstract class Sensor : MonoBehaviour {
 	private IEnumerator RunGeneration(Pool pool) {
 		int counter = 0;
 		int iter = 0, jter = 0;
-		for (float i = 0; i <= pool.SizeY; i += CarPreferences.map["stepY"]) {
+		for (float i = 0; i <= pool.SizeY; i += CarPreferences.current.stepY) {
 			jter = 0;
-			for (float j = 0; j <= pool.SizeX; j += CarPreferences.map["stepX"]) {
+			for (float j = 0; j <= pool.SizeX; j += CarPreferences.current.stepX) {
 				int index = iter * pool.SizeY + jter;
 				pool.Map[iter.ToString() + "-" + jter.ToString()] = new Point(iter, jter);
 				counter++;
@@ -69,7 +69,7 @@ public abstract class Sensor : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.P)) Snapshot();
 	}
 	
-	public Color Coloring(Vector3 originalPos = new Vector3()) {
+	/*public Color Coloring(Vector3 originalPos = new Vector3()) {
 		switch (CarPreferences.map["coloring"]) {
 			case 0:
 				return Color.red;
@@ -79,5 +79,5 @@ public abstract class Sensor : MonoBehaviour {
 			default:
 				return Color.black;
 		}
-	}
+	}*/
 }

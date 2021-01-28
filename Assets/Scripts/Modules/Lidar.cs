@@ -13,10 +13,10 @@ class Lidar : Sensor {
 	private ParticleSystem.Particle temp;
 
 	public override void Init() {
-		degY = CarPreferences.map["degreeY"];
-		degX = CarPreferences.map["degreeX"];
-		stepY = CarPreferences.map["stepY"];
-		stepX = CarPreferences.map["stepX"];
+		degY = CarPreferences.current.degreeY;
+		degX = CarPreferences.current.degreeX;
+		stepY = CarPreferences.current.stepY;
+		stepX = CarPreferences.current.stepX;
 		relativePosition = new Vector3(0, 0.25f, 0);
 		pool = GeneratePool((int) degX, (int) degY);
 	}

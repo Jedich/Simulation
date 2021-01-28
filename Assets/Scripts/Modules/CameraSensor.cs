@@ -42,7 +42,7 @@ public class CameraSensor : MonoBehaviour {
 		for (;;){
 			if (!isComputed) {
 				ProcessImage(ref rawFrame, camWidth, camHeight);
-				Thread.Sleep((int) (CarPreferences.map["cvCallDelay"] * 100));
+				Thread.Sleep((int) (CarPreferences.current.cvCallDelay * 100));
 				isComputed = true;
 			}
 			//yield return new WaitForSeconds(CarPreferences.map["cvCallDelay"]);

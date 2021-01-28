@@ -9,7 +9,7 @@ public class ButtonScript : MonoBehaviour {
 	public Text rotationInfo;
 	Gyroscope gyroscope;
 	private void Start() {
-		if (CarPreferences.map["GUI"] == 0)
+		if (CarPreferences.current.GUI == 0)
 			hideable.SetActive(false);
 		else hideable.SetActive(true);
 		foreach (var cam in Camera.allCameras) {
