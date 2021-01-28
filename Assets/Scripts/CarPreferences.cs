@@ -6,7 +6,6 @@ using UnityEngine;
 public class CarPreferences : MonoBehaviour {
 	private StreamReader read;
 	public static Dictionary<string, float> map = new Dictionary<string, float>();
-
 	public void Awake() {
 		read = File.OpenText(Application.dataPath + "/baseSettings.ini");
 		string allLines = read.ReadToEnd();

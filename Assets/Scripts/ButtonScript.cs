@@ -12,7 +12,9 @@ public class ButtonScript : MonoBehaviour {
 		if (CarPreferences.map["GUI"] == 0)
 			hideable.SetActive(false);
 		else hideable.SetActive(true);
-		Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer("points"));
+		foreach (var cam in Camera.allCameras) {
+			cam.cullingMask = ~(1 << LayerMask.NameToLayer("points"));
+		}
 		if (gameObject.GetComponent<Load>().existingGyro != null)
 			gyroscope = gameObject.GetComponent<Load>().existingGyro;
 	}
