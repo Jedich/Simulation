@@ -17,6 +17,10 @@
 /opencv-pipe/.idea/
 /.idea
 
+# ----------------------------
+/Assets/Plugins/CVConnection/opencv_world451d.dll
+# ----------------------------
+
 # Unity3D generated meta files
 *.pidb.meta
 
