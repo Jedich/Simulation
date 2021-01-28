@@ -4820,6 +4820,7 @@ MonoBehaviour:
   outputFrame: {fileID: 0}
   camTexture: {fileID: 8400000, guid: 1895eebc239a4c34385a0e5cb7a7ae85, type: 2}
   testSprite: {fileID: 281885936}
+  isComputed: 0
 --- !u!4 &785075514 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012934762246, guid: 6577377bae7db18429e690f8f8f57881,
@@ -5221,7 +5222,7 @@ GameObject:
   - component: {fileID: 865263923}
   - component: {fileID: 865263922}
   m_Layer: 0
-  m_Name: Main Camera (1)
+  m_Name: ForwardCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18151,6 +18152,16 @@ PrefabInstance:
     - target: {fileID: 4000012934762246, guid: 6577377bae7db18429e690f8f8f57881, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013910545014, guid: 6577377bae7db18429e690f8f8f57881,
+        type: 3}
+      propertyPath: maxTorque
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013910545014, guid: 6577377bae7db18429e690f8f8f57881,
+        type: 3}
+      propertyPath: keyboardInput
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 146000011612348708, guid: 6577377bae7db18429e690f8f8f57881,
         type: 3}
