@@ -2,21 +2,26 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Modules;
 using UnityEngine;
 using UnityEngine.UI;
+using Gyroscope = Modules.Gyroscope;
 
 public class Load : MonoBehaviour {
 	public Gyroscope existingGyro;
 	Vector3 direction;
-	public GameObject gyroPrefab;
+	public GameObject gyroPrefab, cameraPrefab;
 	public GameObject carBodyInst;
 	public Sensor sensor = null;
 	public GameObject pointPrefab;
 	public GameObject physicalPrefab;
 	public ParticleSystem pointCloud;
 	public ParticleSystem obstaclePointCloud;
+	public bool isObserving = false;
+	public Image vision;
 	public static Load instance = null;
-
+	public RenderTexture camTexture;
+	internal CameraSensor cameraSensor;
 	public void Start() {
 		if (instance == null) {
 			instance = this;
@@ -36,7 +41,10 @@ public class Load : MonoBehaviour {
 					sensor = carBodyInst.GetComponent<Lidar>();
 					break;
 				case "SENSOR_CAMERA":
+					GameObject camera;
+					camera = Instantiate(cameraPrefab, carBodyInst.transform);
 					carBodyInst.AddComponent(typeof(CameraSensor));
+					cameraSensor = carBodyInst.GetComponent<CameraSensor>();
 					break;
 				case "SENSOR_GYRO":
 					GameObject gyro;
@@ -53,3 +61,4 @@ public class Load : MonoBehaviour {
 		CameraMovement.target = carBodyInst.transform;
 	}
 }
+

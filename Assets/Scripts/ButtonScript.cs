@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Gyroscope = Modules.Gyroscope;
+
 public class ButtonScript : MonoBehaviour {
 	public GameObject pos, hideable;
 	public Slider rWheel, lWheel, bothWheels;
@@ -34,11 +37,13 @@ public class ButtonScript : MonoBehaviour {
 	public void CheckInput() {
 		Camera.main.cullingMask = 1 << 10;
 		Camera.main.backgroundColor = Color.black;
+		Load.instance.isObserving = true;
 		//pos.SetActive(true);
 	}
 	public void OffOutput() {
 		Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer("points"));
 		Camera.main.backgroundColor = Color.white;
+		Load.instance.isObserving = false;
 		//pos.SetActive(false);
 	}
 	public void Restart() {
